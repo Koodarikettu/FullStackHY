@@ -75,7 +75,7 @@ app.use(express.static('dist'))
   })
 
   const generateId = (max) => {
-    return Math.floor(Math.random() * max)
+    return Math.floor(Math.random() * max).toString()
   }
   
   app.post('/api/persons', (request, response) => {
