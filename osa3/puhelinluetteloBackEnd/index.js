@@ -43,7 +43,7 @@ app.use(morgan(function (tokens, req, res) {
     tokens.body(req)
   ].join(' ')
 }))
-
+app.use(express.static('dist'))
 
   
   app.get('/api/persons', (request, response) => {
