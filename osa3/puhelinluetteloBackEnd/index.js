@@ -40,14 +40,9 @@ app.use(express.static('dist'))
 
 
   app.get('/api/persons/:id', (request, response) => {
-    const id = request.params.id
-    const person = persons.find(person => person.id === id)
-    
-    if (person) {
+    Person.findById(request.params.id).then(person =>{
       response.json(person)
-    } else {
-      response.status(404).end()
-    }
+    })
   })
 
 
@@ -73,11 +68,10 @@ app.use(express.static('dist'))
   
     
 
-    const person = {
+    const person = new Person({
       name: body.name,
       number: body.number,
-      id: generateId(100000000),
-    }
+    })
 
     if (!persons.find(person => person.name === body.name) === false) {
       return response.status(400).json({ 
@@ -85,10 +79,10 @@ app.use(express.static('dist'))
       })
     }
 
-      
-    persons = persons.concat(person)
-  
-    response.json(person)
+    person.save().then(savedPerson => {
+      response.json(savedPerson)
+
+    })
   })
 
   const PORT = process.env.PORT
