@@ -88,6 +88,11 @@ const App = () => {
           setPersons(persons.map(person => person.id !== findPerson.id ? person : returnedPerson))
           setMessage(`Changed number of ${returnedPerson.name}`)
           setTimeout(() => {setMessage(null)}, 1000)
+        }).catch(error => {
+          setMessage(`${error.response.data.error}`)
+          setColor("error")
+          setTimeout(() => {setMessage(null), setColor("added")}, 1000)
+          console.log(error.response.data)
         })
       }
       setNewName("")
