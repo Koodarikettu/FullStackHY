@@ -103,6 +103,12 @@ const App = () => {
         setMessage(`Added ${returnedPerson.name}`)
         setTimeout(() => {setMessage(null), setColor("added")}, 1000)
       })
+      .catch(error => {
+        setMessage(`${error.response.data.error}`)
+        setColor("error")
+        setTimeout(() => {setMessage(null), setColor("added")}, 1000)
+        console.log(error.response.data)
+      })
     }
   }
 
